@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyLab.Oas.Model
+namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// Describes a single response from an API Operation, including design-time, static links to operations based on the response.

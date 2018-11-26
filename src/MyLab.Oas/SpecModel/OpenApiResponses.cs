@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using YamlDotNet.Serialization;
 
-namespace MyLab.Oas.Model
+namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// A container for the expected responses of an operation. The container maps a HTTP response code to the expected response.

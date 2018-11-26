@@ -1,4 +1,4 @@
-﻿namespace MyLab.Oas.Model
+﻿namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// Contains example. n all cases, the example value is expected to be compatible with the type schema of its associated value. Tooling implementations MAY choose to validate compatibility automatically, and reject the example value(s) if incompatible.

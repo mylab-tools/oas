@@ -1,4 +1,4 @@
-﻿namespace MyLab.Oas.Model
+﻿namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// Provides metadata about the API. The metadata MAY be used by tooling as required.

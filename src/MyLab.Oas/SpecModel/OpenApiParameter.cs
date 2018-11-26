@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyLab.Oas.Model
+namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// Describes a single operation parameter. A unique parameter is defined by a combination of a name and location.

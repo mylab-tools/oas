@@ -1,4 +1,4 @@
-﻿namespace MyLab.Oas.Model
+﻿namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// Allows configuration of the supported OAuth Flows.

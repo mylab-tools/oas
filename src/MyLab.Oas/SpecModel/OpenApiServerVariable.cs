@@ -1,4 +1,4 @@
-﻿namespace MyLab.Oas.Model
+﻿namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// Web api server variable

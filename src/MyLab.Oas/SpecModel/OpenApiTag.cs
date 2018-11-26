@@ -1,6 +1,6 @@
 ﻿using YamlDotNet.Serialization;
 
-namespace MyLab.Oas.Model
+namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// A tag used by the specification with additional metadata.

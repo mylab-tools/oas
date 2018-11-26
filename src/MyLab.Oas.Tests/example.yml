@@ -1,0 +1,71 @@
+﻿openapi: 3.0.0
+info:
+  title: Test API
+  version: '1'
+tags:
+  - name: Tag1
+  - name: Tag2
+paths:
+  '/path-item/{id}':
+    post:
+      tags:
+        - Tag1
+      description: Method description
+      parameters:
+        - $ref: '#/components/parameters/Id'
+        - $ref: '#/components/parameters/QParam'
+        - $ref: '#/components/parameters/HeaderParam'
+      responses:
+        '204': 
+          description: Запрос создан
+    get:
+      tags:
+        - Tag2
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': 
+          description: Response description
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/GetResult'
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: An Idnetifier
+      schema:
+        type: string
+      example: 1234567890
+    QParam:
+      name: q
+      in: query
+      required: true
+      description: Query param
+      schema:
+        type: integer
+      example: 2
+    HeaderParam:
+      name: superheader
+      in: header
+      required: false
+      schema:
+        type: string
+  schemas:
+    GetResult:
+      type: object
+      properties:
+        key:
+          description: Key description
+          type: string
+        value:
+          $ref: '#/components/schemas/ResultValue'
+    ResultValue:
+      type: object
+      properties:
+        val:
+          type: string
+  

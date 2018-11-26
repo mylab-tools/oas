@@ -1,6 +1,6 @@
 ﻿using YamlDotNet.Serialization;
 
-namespace MyLab.Oas.Model
+namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// May contains object reference

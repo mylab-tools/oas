@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using YamlDotNet.Serialization;
 
-namespace MyLab.Oas.Model
+namespace MyLab.Oas.SpecModel
 {
     /// <summary>
     /// Describes WebApi
     /// </summary>
-    public class ApiDescription
+    public class OpenApiDescription
     {
         /// <summary>
         /// REQUIRED. This string MUST be the semantic version number of the OpenAPI Specification version that the OpenAPI document uses. The openapi field SHOULD be used by tooling specifications and clients to interpret the OpenAPI document. This is not related to the API info.version string.
