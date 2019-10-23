@@ -9,6 +9,8 @@ namespace MyLab.Oas.SpecModel
     /// </summary>
     public class OpenApiSchema : OpenApiRefObject
     {
+        [YamlMember(Alias = "x-id", ApplyNamingConventions = false)]
+        public string XId { get; set; }
         /// <summary>
         /// Value MUST be a string. Multiple types via an array are not supported.
         /// </summary>

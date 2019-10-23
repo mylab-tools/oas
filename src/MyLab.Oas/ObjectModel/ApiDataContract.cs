@@ -6,7 +6,7 @@ namespace MyLab.Oas.ObjectModel
 {
     internal class ApiDataContract
     {
-        public string Name { get; set; }
+        public string Id { get; set; }
         public ContractType Type { get; set; }
 
         public ApiDataContract ItemsContract { get; set; }
@@ -17,13 +17,28 @@ namespace MyLab.Oas.ObjectModel
 
         public ApiEnumValue[] EnumValues { get; set; }
 
-        public static ApiDataContract Create(OpenApiSchema schema, ComponentProvider cProvider, string name = null)
+        public static ApiDataContract Create(OpenApiSchema schemaOrigin, ComponentProvider cProvider)
         {
+            OpenApiSchema schema;
+            string schemaId;
+
+            if (schemaOrigin.Ref != null)
+            {
+                var foundSchema = cProvider.ProvideSchema(schemaOrigin.Ref);
+                schema = foundSchema.Component;
+                schemaId = foundSchema.Key;
+            }
+            else
+            {
+                schema = schemaOrigin;
+                schemaId = schemaOrigin.XId;
+            }
+
             var res = new ApiDataContract
             {
                 Type = DetectType(schema.Type, schema.Format),
                 Comment = schema.Description,
-                Name = name
+                Id = schemaId
             };
 
             if (schema.Properties != null)
@@ -34,11 +49,7 @@ namespace MyLab.Oas.ObjectModel
                 res.Properties = schema.Properties.Select(p => new ApiDataContractProperty
                 {
                     Name = p.Key,
-                    Contract = Create(
-                        p.Value.Ref != null
-                            ? cProvider.ProvideSchema(p.Value.Ref)
-                            : p.Value,
-                        cProvider),
+                    Contract = Create(p.Value,cProvider),
                     Required = schema.Required != null && Array.Exists(schema.Required, s => s == p.Key)
                 }).ToArray();
             }
@@ -46,11 +57,7 @@ namespace MyLab.Oas.ObjectModel
             {
                 if (res.Type != ContractType.Array)
                     throw new InvalidOperationException($"The items type specified for not array type '{schema.Type}'");
-                res.ItemsContract = Create(
-                    schema.Items.Ref != null
-                        ? cProvider.ProvideSchema(schema.Items.Ref)
-                        : schema.Items,
-                    cProvider);
+                res.ItemsContract = Create(schema.Items,cProvider);
             }
 
             if (schema.Enum != null)

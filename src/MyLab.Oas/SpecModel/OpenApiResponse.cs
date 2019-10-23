@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using YamlDotNet.Serialization;
 
 namespace MyLab.Oas.SpecModel
 {
@@ -7,6 +8,8 @@ namespace MyLab.Oas.SpecModel
     /// </summary>
     public class OpenApiResponse : OpenApiRefObject
     {
+        [YamlMember(Alias = "x-id", ApplyNamingConventions = false)]
+        public string XId { get; set; }
         /// <summary>
         /// REQUIRED. A short description of the response. CommonMark syntax MAY be used for rich text representation.
         /// </summary>

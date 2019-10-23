@@ -16,7 +16,7 @@ namespace MyLab.Oas.ObjectModel
             _components = components;
         }
 
-        public OpenApiSchema ProvideSchema(string reference)
+        public ApiComponentDescription<OpenApiSchema> ProvideSchema(string reference)
         {
             ValidateReference(reference);
 
@@ -31,7 +31,33 @@ namespace MyLab.Oas.ObjectModel
             if(!schema.HasValue)
                 throw new InvalidOperationException($"Schema not found. Reference: '{reference}'");
 
-            return schema.Value.Value;
+            return new ApiComponentDescription<OpenApiSchema>
+            {
+                Key = key,
+                Component = schema.Value.Value
+            };
+        }
+
+        public ApiComponentDescription<OpenApiResponse> ProvideResponse(string reference)
+        {
+            ValidateReference(reference);
+
+            var r = ParseReference(reference);
+
+            const string path = "/components/responses/";
+
+            var key = GetKey(r.Path, path);
+
+            var schema = _components.Responses?.FirstOrDefault(s => s.Key == key);
+
+            if (!schema.HasValue)
+                throw new InvalidOperationException($"Response not found. Reference: '{reference}'");
+
+            return new ApiComponentDescription<OpenApiResponse>
+            {
+                Key = key,
+                Component = schema.Value.Value
+            };
         }
 
         private string GetKey(string refPath, string basePath)
@@ -60,5 +86,11 @@ namespace MyLab.Oas.ObjectModel
             if(reference.Count(ch => ch == '#') != 1)
                 throw new InvalidOperationException($"Wrong reference format: '{reference}'");
         }
+    }
+
+    class ApiComponentDescription<T>
+    {
+        public string Key { get; set; }
+        public T Component { get; set; }
     }
 }

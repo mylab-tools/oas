@@ -13,7 +13,7 @@ namespace MyLab.Oas.Tests
         public void ShouldDetectObject()
         {
             //Arrange
-            var objContract = TestTools.ApiDesc.DataContracts.Single(c => c.Name == "ResultValue");
+            var objContract = TestTools.ApiDesc.DataContracts.Single(c => c.Id == "ResultValue");
 
             //Act
 
@@ -27,17 +27,15 @@ namespace MyLab.Oas.Tests
         public void ShouldBindReferences()
         {
             //Arrange
-            var contract = TestTools.ApiDesc.DataContracts.Single(c => c.Name == "GetResult");
+            var contract = TestTools.ApiDesc.DataContracts.Single(c => c.Id == "GetResult");
             var refContract = contract.Properties.FirstOrDefault(p => p.Name == "value");
-            var expectedContract = TestTools.ApiDesc.DataContracts.Single(c => c.Name == "ResultValue");
 
             //Act
 
 
             //Assert
             Assert.NotNull(refContract);
-            Assert.Equal(expectedContract.Type, refContract.Contract.Type);
-            Assert.Equal(expectedContract.Properties[0].Name, refContract.Contract.Properties[0].Name);
+            Assert.Equal("ResultValue", refContract.Contract.Id);
         }
 
         [Theory]
@@ -46,7 +44,7 @@ namespace MyLab.Oas.Tests
         public void ShouldDetectEnums(string itemValue, string expectedDescription)
         {
             //Arrange
-            var enumContract = TestTools.ApiDesc.DataContracts.Single(c => c.Name == "EnumContract");
+            var enumContract = TestTools.ApiDesc.DataContracts.Single(c => c.Id == "EnumContract");
             var item = enumContract.EnumValues?.FirstOrDefault(e => e.Value == itemValue);
 
             //Act
@@ -61,7 +59,7 @@ namespace MyLab.Oas.Tests
         public void ShouldDetectArray()
         {
             //Arrange
-            var arrayContract = TestTools.ApiDesc.DataContracts.Single(c => c.Name == "ArrayContract");
+            var arrayContract = TestTools.ApiDesc.DataContracts.Single(c => c.Id == "ArrayContract");
 
             //Act
 

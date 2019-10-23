@@ -17,10 +17,10 @@ namespace MyLab.Oas.Tests
         [Theory]
         [InlineData("GetResult")]
         [InlineData("ResultValue")]
-        public void ShouldDetectDataContracts(string dcName)
+        public void ShouldDetectDataContracts(string dcId)
         {
             //Assert
-            Assert.Contains(TestTools.ApiDesc.DataContracts, dc => dc.Name == dcName);
+            Assert.Contains(TestTools.ApiDesc.DataContracts, dc => dc.Id == dcId);
         }
     }
 }

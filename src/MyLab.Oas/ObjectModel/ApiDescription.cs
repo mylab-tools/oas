@@ -21,7 +21,13 @@ namespace MyLab.Oas.ObjectModel
             {
                 var cProvider = new ComponentProvider(description.Components);
                 res.DataContracts = description.Components.Schemas
-                    .Select(s => ApiDataContract.Create(s.Value, cProvider, s.Key))
+                    .Select(s =>
+                    {
+                        var dc = ApiDataContract.Create(s.Value, cProvider);
+                        if (dc.Id == null)
+                            dc.Id = s.Key;
+                        return dc;
+                    })
                     .ToArray();
             }
 

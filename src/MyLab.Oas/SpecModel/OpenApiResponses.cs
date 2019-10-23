@@ -11,10 +11,5 @@ namespace MyLab.Oas.SpecModel
     /// </summary>
     public class OpenApiResponses : Dictionary<string, OpenApiResponse>
     {
-        /// <summary>
-        /// Reference
-        /// </summary>
-        [YamlMember(Alias = "$ref")]
-        public string Ref { get; set; }
     }
 }
