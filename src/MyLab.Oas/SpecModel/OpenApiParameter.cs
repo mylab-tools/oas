@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using YamlDotNet.Serialization;
 
 namespace MyLab.Oas.SpecModel
 {
@@ -7,6 +8,8 @@ namespace MyLab.Oas.SpecModel
     /// </summary>
     public class OpenApiParameter : OpenApiRefObject
     {
+        [YamlMember(Alias = "x-id", ApplyNamingConventions = false)]
+        public string XId { get; set; }
         /// <summary>
         /// REQUIRED. The name of the parameter. Parameter names are case sensitive.
         /// * If 'in' is "path", the name field MUST correspond to the associated path segment from the path field in the Paths Object.See Path Templating for further information.

@@ -80,5 +80,30 @@ namespace MyLab.Oas.Tests
             Assert.Equal(HttpStatusCode.NoContent, firstDescription.Code);
             Assert.Equal("Запрос создан", firstDescription.Comment);
         }
+
+        [Theory]
+        [InlineData("Id", "id", ApiMethodParameterLocation.Path, ApiMethodParameterStyle.Simple, true, ContractType.String)]
+        [InlineData("QParam", "q", ApiMethodParameterLocation.Query, ApiMethodParameterStyle.Form, true, ContractType.Integer)]
+        [InlineData("HeaderParam", "superheader", ApiMethodParameterLocation.Header, ApiMethodParameterStyle.Simple, false, ContractType.String)]
+        public void ShouldDetectParameters(
+            string id, 
+            string name,
+            ApiMethodParameterLocation location, 
+            ApiMethodParameterStyle style, 
+            bool required, 
+            ContractType contractType)
+        {
+            //Arrange
+            var p = _post.Parameters?.FirstOrDefault(prm => prm.Id == id);
+
+            //Assert
+            Assert.NotNull(p);
+            Assert.Equal(name, p.Name);
+            Assert.Equal(location, p.Location);
+            Assert.Equal(style, p.Style);
+            Assert.Equal(required, p.Required);
+            Assert.NotNull(p.Contract);
+            Assert.Equal(contractType, p.Contract.Type);
+        }
     }
 }

@@ -48,15 +48,37 @@ namespace MyLab.Oas.ObjectModel
 
             var key = GetKey(r.Path, path);
 
-            var schema = _components.Responses?.FirstOrDefault(s => s.Key == key);
+            var response = _components.Responses?.FirstOrDefault(s => s.Key == key);
 
-            if (!schema.HasValue)
+            if (!response.HasValue)
                 throw new InvalidOperationException($"Response not found. Reference: '{reference}'");
 
             return new ApiComponentDescription<OpenApiResponse>
             {
                 Key = key,
-                Component = schema.Value.Value
+                Component = response.Value.Value
+            };
+        }
+
+        public ApiComponentDescription<OpenApiParameter> ProvideParameter(string reference)
+        {
+            ValidateReference(reference);
+
+            var r = ParseReference(reference);
+
+            const string path = "/components/parameters/";
+
+            var key = GetKey(r.Path, path);
+
+            var parameter = _components.Parameters?.FirstOrDefault(s => s.Key == key);
+
+            if (!parameter.HasValue)
+                throw new InvalidOperationException($"Parameter not found. Reference: '{reference}'");
+
+            return new ApiComponentDescription<OpenApiParameter>
+            {
+                Key = key,
+                Component = parameter.Value.Value
             };
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace MyLab.Oas.ObjectModel
 {
-    enum ContractType
+    public enum ContractType
     {
         Integer,
         Long,

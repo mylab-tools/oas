@@ -14,10 +14,9 @@ namespace MyLab.Oas.ObjectModel
         public string Service { get; set; }
         public string Comment { get; set; }
         public ApiRequestContent[] RequestContents { get; set; }
-
         public ApiDataContract ResponseContract { get; set; }
-
         public ApiResponseDescription[] ResponsesDescriptions { get; set; }
+        public ApiMethodParameter[] Parameters { get; set; }
 
         public static OpenApiServerMethod Create(string path, string method, OpenApiOperation operation, ComponentProvider cProvider)
         {
@@ -59,7 +58,7 @@ namespace MyLab.Oas.ObjectModel
                         {
                             return new ApiResponseDescription
                             {
-                                Code = Enum.Parse<HttpStatusCode>(r.Key),
+                                Code = Enum.Parse<HttpStatusCode>(r.Key, true),
                                 Comment = r.Value.Description
                             };
                         }
@@ -70,6 +69,11 @@ namespace MyLab.Oas.ObjectModel
                                 e);
                         }
                     }).ToArray();
+            }
+
+            if (operation.Parameters != null)
+            {
+                res.Parameters = operation.Parameters.Select(p => ApiMethodParameter.Create(p, cProvider)).ToArray();
             }
 
             return res;
