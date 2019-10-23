@@ -9,6 +9,7 @@ namespace MyLab.Oas.Tests
     public class ComponentProviderBehavior
     {
         [Theory]
+        [InlineData("Wrong base path", "#/components/parameters/Id", typeof(InvalidOperationException))]
         [InlineData("Null reference", null, typeof(ArgumentException))]
         [InlineData("Empty reference", "", typeof(ArgumentException))]
         [InlineData("Full file reference", "foo.yml", typeof(NotSupportedException))]
