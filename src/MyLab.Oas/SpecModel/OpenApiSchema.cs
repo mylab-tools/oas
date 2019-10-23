@@ -44,7 +44,7 @@ namespace MyLab.Oas.SpecModel
         /// <summary>
         /// Contains descriptions for enum items
         /// </summary>
-        [YamlMember(Alias = "x-enum-description")]
+        [YamlMember(Alias = "x-enum-description", ApplyNamingConventions=false)]
         public XEnumItemDescription[] XEnumDescription { get; set; }
         /// <summary>
         /// Enumerate available values

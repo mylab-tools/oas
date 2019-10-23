@@ -2,7 +2,7 @@
 
 namespace MyLab.Oas.Tests
 {
-    public class OpenApiDescriptionSerializationBehavior
+    public class ApiDescriptionSerializationBehavior
     {
         [Fact]
         public void ShouldSerialize()

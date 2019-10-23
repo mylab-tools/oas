@@ -1,16 +1,26 @@
-﻿using Xunit;
+﻿using Newtonsoft.Json.Serialization;
+using Xunit;
 
 namespace MyLab.Oas.Tests
 {
     public class ApiDescriptionBehavior
     {
-        [Fact]
-        public void ShouldDetectServerMethods()
+        [Theory]
+        [InlineData("POST")]
+        [InlineData("GET")]
+        public void ShouldDetectServerMethods(string method)
         {
             //Assert
-            Assert.NotNull(TestTools.ApiDesc.ServerMethods);
-            Assert.Contains(TestTools.ApiDesc.ServerMethods, m => m.Path == "/path-item/{id}" && m.Method == "POST");
-            Assert.Contains(TestTools.ApiDesc.ServerMethods, m => m.Path == "/path-item/{id}" && m.Method == "GET");
+            Assert.Contains(TestTools.ApiDesc.ServerMethods, m => m.Path == "/path-item/{id}" && m.Method == method);
+        }
+
+        [Theory]
+        [InlineData("GetResult")]
+        [InlineData("ResultValue")]
+        public void ShouldDetectDataContracts(string dcName)
+        {
+            //Assert
+            Assert.Contains(TestTools.ApiDesc.DataContracts, dc => dc.Name == dcName);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MyLab.Oas.SpecModel
         /// <summary>
         /// Title
         /// </summary>
-        [YamlMember(Alias = "x-title")]
+        [YamlMember(Alias = "x-title", ApplyNamingConventions = false)]
         public string XTitle{ get; set; }
 
         /// <summary>

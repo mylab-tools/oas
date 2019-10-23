@@ -17,6 +17,14 @@ namespace MyLab.Oas.ObjectModel
             if(description.Paths != null)
                 res.ServerMethods = GetMethods(description.Paths, new ComponentProvider(description.Components));
 
+            if (description.Components?.Schemas != null)
+            {
+                var cProvider = new ComponentProvider(description.Components);
+                res.DataContracts = description.Components.Schemas
+                    .Select(s => ApiDataContract.Create(s.Value, cProvider, s.Key))
+                    .ToArray();
+            }
+
             return res;
         }
 

@@ -6,6 +6,7 @@ namespace MyLab.Oas.ObjectModel
 {
     internal class ApiDataContract
     {
+        public string Name { get; set; }
         public ContractType Type { get; set; }
 
         public ApiDataContract ItemsContract { get; set; }
@@ -16,12 +17,13 @@ namespace MyLab.Oas.ObjectModel
 
         public ApiEnumValue[] EnumValues { get; set; }
 
-        public static ApiDataContract Create(OpenApiSchema schema, ComponentProvider cProvider)
+        public static ApiDataContract Create(OpenApiSchema schema, ComponentProvider cProvider, string name = null)
         {
             var res = new ApiDataContract
             {
                 Type = DetectType(schema.Type, schema.Format),
-                Comment = schema.Description
+                Comment = schema.Description,
+                Name = name
             };
 
             if (schema.Properties != null)
@@ -75,6 +77,8 @@ namespace MyLab.Oas.ObjectModel
                 {
                     switch (format)
                     {
+                        case null:
+                        case "":
                         case "int32": return ContractType.Integer;
                         case "int64": return ContractType.Long;
                         default: throw new NotSupportedException($"Format '{format}' not supported for type '{type}'");

@@ -7,15 +7,15 @@ using Xunit;
 
 namespace MyLab.Oas.Tests
 {
-    public class OpenApiServerMethodBehavior
+    public class ApiServerMethodBehavior
     {
         private readonly OpenApiServerMethod _post;
         private readonly OpenApiServerMethod _get;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="OpenApiServerMethodBehavior"/>
+        /// Initializes a new instance of <see cref="ApiServerMethodBehavior"/>
         /// </summary>
-        public OpenApiServerMethodBehavior()
+        public ApiServerMethodBehavior()
         {
             _post = TestTools.ApiDesc.ServerMethods.Single(m => m.Path == "/path-item/{id}" && m.Method == "POST");
             _get = TestTools.ApiDesc.ServerMethods.Single(m => m.Path == "/path-item/{id}" && m.Method == "GET");

@@ -5,6 +5,7 @@ info:
 tags:
   - name: Tag1
   - name: Tag2
+    x-title: TagTitle
 paths:
   '/path-item/{id}':
     post:
@@ -73,4 +74,17 @@ components:
       properties:
         val:
           type: string
-  
+    EnumContract:
+      type: string
+      enum: 
+      - item1
+      - item2
+      x-enum-description:
+      - item: 'item1'
+        description: 'description1'
+      - item: 'item2'
+        description: 'description2'
+    ArrayContract:
+      type: array
+      items:
+        type: integer
