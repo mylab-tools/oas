@@ -36,6 +36,7 @@ namespace MyLab.Oas.SpecModel
         /// Property definitions MUST be a Schema Object and not a standard JSON Schema (inline or referenced).
         /// </summary>
         public Dictionary<string, OpenApiSchema> Properties { get; set; }
+
         /// <summary>
         /// Value MUST be an object and not an array. Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema. items MUST be present if the type is array.
         /// </summary>

@@ -24,7 +24,7 @@ namespace MyLab.Oas.SpecModel
         /// </summary>
         public Dictionary<string, OpenApiExample> Examples { get; set; }
         /// <summary>
-        /// RequestBodies
+        /// RequestContents
         /// </summary>
         public Dictionary<string, OpenApiRequestBody> RequestBodies { get; set; }
         /// <summary>
